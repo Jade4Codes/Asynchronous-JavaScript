@@ -122,24 +122,125 @@ const renderCountry = function (data, className = '') {
 //     });
 // };
 
-const getCountryData = function (country) {
-  // Country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => response.json())
-    .then(data => {
-      renderCountry(data[0]);
-      const neighbour = data[0].borders[0];
+// const renderError = function (msg) {
+//   countriesContainer.insertAdjacentText('beforeend', msg);
+//   // countriesContainer.style.opacity = 1;
+// };
 
-      if (!neighbour) return;
+// const getJSON = function (url, errorMsg = 'Something went wrong') {
+//   return fetch(url).then(response => {
+//     console.log(response.ok);
+//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+//     return response.json();
+//   });
+// };
 
-      // Country 2
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-    })
-    .then(response => response.json())
-    .then(data => renderCountry(data[0], 'neighbour'))
-    .catch(err => alert(err));
-};
+// const getCountryData = function (country) {
+//   // Country 1
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(response => {
+//       if (!response.ok)
+//         throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//       const neighbour = data[0].borders[0];
 
-btn.addEventListener('click', function () {
-  getCountryData('portugal');
+//       if (!neighbour) return;
+
+//       // Country 2
+//       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+//     })
+//     .then(response => response.json())
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err}`);
+//       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+// const renderError = function (msg) {
+//   countriesContainer.insertAdjacentText('beforeend', msg);
+//   // countriesContainer.style.opacity = 1;
+// };
+
+// const getJSON = function (url, errorMsg = 'Something went wrong') {
+//   return fetch(url).then(response => {
+//     // console.log(response.ok);
+//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+//     return response.json();
+//   });
+// };
+
+// const getCountryData = function (country) {
+//   // Country 1
+
+//   getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
+//     .then(data => {
+//       renderCountry(data[0]);
+//       if (!data[0].borders) throw new Error('No neighbour found!');
+//       const neighbour = data[0].borders[0];
+
+//       // Country 2
+//       return getJSON(
+//         `https://restcountries.com/v3.1/alpha/${neighbour}`,
+//         'Country not found'
+//       );
+//     })
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => {
+//       console.error(`${err}`);
+//       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
+
+// btn.addEventListener('click', function () {
+//   getCountryData('australia');
+// });
+
+//*******
+
+// Coding Challenge 1
+
+// const whereAmI = function (lat, lng) {
+//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//     .then(res => {
+//       if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(data);
+//       console.log(`You are in ${data.city}, ${data.country}`);
+//       return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error(`Country not found (${res.status})`);
+//       return res.json();
+//     })
+//     .then(data => renderCountry(data[0], 'neighbour'))
+//     .catch(err => console.error(`${err.message} 💥`));
+// };
+
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+
+//////******* */
+
+console.log('Test Start');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then(res => {
+  for (let i = 0; i < 100000000; i++) {}
+  console.log(res);
 });
+
+console.log('Test end');
